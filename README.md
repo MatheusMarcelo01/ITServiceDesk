@@ -1,4 +1,4 @@
-![logo](src/images/logo-p.png)
+![logo](src/Images/logo-p.png)
 
 Bem-vindo ao Sistema de Chamados Web de TI - uma aplicação web sem fins lucrativos, desenvolvida para permitir que os usuários registrem e gerenciem solicitações de suporte técnico no setor de Tecnologia da Informação da Prefeitura de Manduri. Este projeto foi criado com o objetivo de oferecer uma plataforma de treinamento, proporcionando aos usuários uma maneira fácil e eficiente de reportar problemas técnicos e solicitar assistência.
 
