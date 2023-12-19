@@ -1,5 +1,9 @@
-## Available Scripts
+Bem-vindo ao Sistema de Chamados Web de TI - uma aplicação web sem fins lucrativos, desenvolvida para permitir que os usuários registrem e gerenciem solicitações de suporte técnico no setor de Tecnologia da Informação da Prefeitura de Manduri. Este projeto foi criado com o objetivo de oferecer uma plataforma de treinamento, proporcionando aos usuários uma maneira fácil e eficiente de reportar problemas técnicos e solicitar assistência.
 
+Nota:
+Este projeto é estritamente educacional e não tem fins lucrativos. Ele foi concebido para fornecer uma experiência prática no desenvolvimento de aplicações web para a gestão de chamados de suporte técnico.
+
+## Available Scripts
 In the project directory, you can run:
 
 ### `npm start`
