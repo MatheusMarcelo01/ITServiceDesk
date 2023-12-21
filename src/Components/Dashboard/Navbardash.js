@@ -2,9 +2,8 @@ import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
   VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
 import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
-import { BsPhone, } from "react-icons/bs";
+import { BsPhone, BsFillHouseDoorFill } from "react-icons/bs";
 import { GrAddCircle } from "react-icons/gr";
-import { TfiHome  } from "react-icons/tfi";
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
 
@@ -93,7 +92,7 @@ const Choc = () => {
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-                <Button variant="ghost" leftIcon={<TfiHome/>}
+                <Button variant="ghost" leftIcon={<BsFillHouseDoorFill/>}
                 size="sm" color="white" _hover={{ bg: 'green.700' }} 
                 onClick={() => {
                   window.location.href = '/';
