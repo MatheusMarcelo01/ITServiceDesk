@@ -104,7 +104,7 @@ const Choc = () => {
                 variant="ghost" leftIcon={<BsPhone/>}size="sm" color='white'  
                 _hover={{ bg: 'green.700' ,transform: 'scale(1.05)'}} 
                 onClick={() => {
-                  window.location.href = 'https://www.manduri.sp.gov.br/fale-conosco/';
+                  window.open('https://www.manduri.sp.gov.br/fale-conosco/', '_black');
                 }}
                 
               > Contato
