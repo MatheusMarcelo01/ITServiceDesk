@@ -61,7 +61,8 @@ const Choc = () => {
                     textTransform="uppercase"
                     w="fit-content"
                     bg="green.600" 
-                    _hover={{ bg: 'green.800' }} 
+                    _hover={{ bg: 'green.800', transform: 'scale(1.05)',
+                    transition: 'transform 0.3s ease'}} 
 
                     onClick={() => {
                       window.location.href = './Chamado';

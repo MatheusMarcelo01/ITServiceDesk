@@ -16,7 +16,6 @@ import { FaFacebookF } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 import Logo from "../../Images/logo.png"; 
 
-
 const CompanyFooter = () => {
   return (
     <Box bg="gray.800" _dark={{ bg: "gray.600" }}>
@@ -32,10 +31,14 @@ const CompanyFooter = () => {
             src= {Logo}
             alt="Logo"
             rounded="lg"
+            _hover={{ transform: 'scale(1.05)',transition: 'transform 0.3s ease'}}
             width={{ base: "60px", lg: "60px" }}
             height={{ base: "60px", lg: "60px" }}
             my={{ base: 2, lg: 0 }}
+            
+          
           />
+         
         </Flex>
         <HStack
           alignItems="start"
@@ -47,15 +50,15 @@ const CompanyFooter = () => {
           textAlign={{ base: "center", md: "left" }}
         >
           <Flex justify="start" direction="column">
-          <Link href="../Login" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Painel de Administração</Link>
-          <Link href="../Login" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Consultar chamados</Link>
+          <Link href="../Login" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Painel de Administração</Link>
+          <Link href="../Login" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Consultar chamados</Link>
 
 
           </Flex>
           <Flex justify="start" direction="column">
             
-          <Link href="../Chamado" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Abrir novo chamado</Link>
-          <Link href="../Chamado" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Ajuda com os chamados</Link>
+          <Link href="../Chamado" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Abrir novo chamado</Link>
+          <Link href="../Chamado" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Ajuda com os chamados</Link>
 
           </Flex>
         </HStack>
@@ -69,13 +72,13 @@ const CompanyFooter = () => {
           textAlign={{ base: "center", md: "left" }}
         >
           <Flex justify="start" direction="column">
-          <Link href="https://www.manduri.sp.gov.br/" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Site Prefeitura Municipal</Link>
-          <Link href="https://www.manduri.sp.gov.br/webmail/" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>E-mail</Link>
+          <Link href="https://www.manduri.sp.gov.br/" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Site Prefeitura Municipal</Link>
+          <Link href="https://www.manduri.sp.gov.br/webmail/" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>E-mail</Link>
 
           </Flex>
           <Flex justify="start" direction="column">
-            <Link href="https://www.manduri.sp.gov.br/fale-conosco/" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Contato</Link>
-            <Link href="https://www.google.com/maps/place/23%C2%B000'12.5%22S+49%C2%B019'08.3%22W/@-23.003464,-49.3189715,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-23.003464!4d-49.3189715?entry=ttu" isExternal _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>Localização</Link>
+            <Link href="https://www.manduri.sp.gov.br/fale-conosco/" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Contato</Link>
+            <Link href="https://www.google.com/maps/place/23%C2%B000'12.5%22S+49%C2%B019'08.3%22W/@-23.003464,-49.3189715,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-23.003464!4d-49.3189715?entry=ttu" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Localização</Link>
 
 
 

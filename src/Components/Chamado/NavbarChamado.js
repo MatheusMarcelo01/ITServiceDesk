@@ -2,9 +2,7 @@ import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
   VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
 import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
-import { BsPhone, } from "react-icons/bs";
-import { GrAddCircle } from "react-icons/gr";
-import { TfiPanel,  } from "react-icons/tfi";
+import { BsPhone, BsFillHouseDoorFill} from "react-icons/bs";
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
 
@@ -87,14 +85,15 @@ const Choc = () => {
               display="flex"
               alignItems="center"
             >
-              <chakra.img src={Logo} alt="Logo" boxSize="60px" objectFit="cover"/>
+              <chakra.img src={Logo} alt="Logo" boxSize="60px" objectFit="cover"_hover={{ transform: 'scale(1.05)',transition: 'transform 0.3s ease'}}/>
 
               <VisuallyHidden>Choc</VisuallyHidden>
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-                <Button variant="ghost" leftIcon={<TfiPanel/>}
-                size="sm" color="white" _hover={{ bg: 'green.700' }} 
+                <Button variant="ghost" leftIcon={<BsFillHouseDoorFill/>}
+                size="sm" color="white" _hover={{ bg: 'green.700', transform: 'scale(1.05)',
+                transition: 'transform 0.3s ease' }} 
                 onClick={() => {
                   window.location.href = './Login';
                 }}
@@ -103,7 +102,8 @@ const Choc = () => {
              
               <Button
                 variant="ghost" leftIcon={<BsPhone/>}size="sm" color='white'  
-                _hover={{ bg: 'green.700' }} 
+                _hover={{ bg: 'green.700',transform: 'scale(1.05)',
+                transition: 'transform 0.3s ease' }} 
                 onClick={() => {
                   window.location.href = 'https://www.manduri.sp.gov.br/fale-conosco/' ;
                 }}
@@ -131,12 +131,15 @@ const Choc = () => {
               color="gray.200"
               _dark={{ color: "inherit" }}
               rounded="sm"
-              _hover={{ color: "green.600", _dark: { color: "gray.600" } }}
+              
+              _hover={{ color: "green.600", transform: "translateY(-2px) scale(1.05)",
+              _dark: { color: "gray.600" } }
+            }
+
             >
-              <AiFillBell />
+              <AiFillBell style={{ fontSize: "21px" }} />
               <VisuallyHidden>Notifications</VisuallyHidden>
             </chakra.a>
-
             <Avatar
               size="sm"
               name="Prefeitura"
