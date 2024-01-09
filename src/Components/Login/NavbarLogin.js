@@ -30,12 +30,13 @@ const Choc = () => {
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color="gray.800"
-                _dark={{ color: "inherit" }}
+                _hover={{ color: "blue"}}
                 variant="ghost"
                 icon={<AiOutlineMenu color="white" />}
                 onClick={mobileNav.onOpen}
               />
+
+              
               <VStack
                 pos="absolute"
                 top={0}
@@ -43,39 +44,54 @@ const Choc = () => {
                 right={0}
                 display={mobileNav.isOpen ? "flex" : "none"}
                 flexDirection="column"
-                p={2}
+                p={5}
                 pb={4}
                 m={2}
                 bg={bg}
-                spacing={3}
+                spacing={6}
                 rounded="sm"
                 shadow="sm"
               >
-                <CloseButton
-                  aria-label="Close menu"
-                  justifySelf="self-start"
-                  onClick={mobileNav.onClose}
-                />
-                <Button w="full" variant="ghost" leftIcon={<AiFillHome />}>
-                  Dashboard
+
+              <IconButton
+                display={{ base: "flex", md: "none" }}
+                aria-label="close menu"
+                fontSize="20px"
+                _hover={{ color: "blue"}}
+                variant="ghost"
+                icon={<AiOutlineMenu color="white" />}
+                marginLeft={{ base: "-420px", md: "0" }}
+                onClick={mobileNav.onClose}
+              />
+                       
+
+                <Button
+                  w="full"
+                  variant="solid"
+                  colorScheme="ghost"
+                  leftIcon={<BsBriefcaseFill color="white" />}  
+                  onClick={() => window.location.href = "./login"}
+      
+                > Administrador
+                </Button>
+                
+
+                <Button
+                  w="full"
+                  variant="solid"
+                  colorScheme="ghost"
+                  leftIcon={<BsPhone color="white" />}
+                > Abrir Chamado
                 </Button>
 
                 <Button
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<AiFillHome color="white" />}
-                >                  teste
+                  leftIcon={<BsPhone color="white" />}
+                > Contato
                 </Button>
-                <Button
-                  w="full"
-                  variant="solid"
-                  colorScheme="brand"
-                  leftIcon={<AiOutlineInbox color="white" />}
-                  
-                >                  teste
-                </Button>
-                
+
               </VStack>
             </Box>
 
