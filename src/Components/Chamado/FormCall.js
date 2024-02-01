@@ -1,5 +1,4 @@
 import { Formik, Field } from "formik";
-
 import {
   Box,
   Button,
@@ -10,20 +9,45 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
+
+function generateSequentialId() {
+  const existingIds = [];
+  const newId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+  return newId;
+}
 
 export default function App() {
+
   return (
     <Flex bg="gray.900" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md" w={["90%", 600]}  h={["90%", 600]}>
+      <Box bg="white" p={6} rounded="md" w={["90%", 600]} h={["90%", 600]}>
         <Formik
           initialValues={{
-            email: "",
+            nome: "",
+            departamento: "",
+            sobre: "",
           }}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={(values, { resetForm }) => { 
+            values.id = generateSequentialId();
+
+
+            
+            // Enviar os dados para o servidor usando axios
+            axios.post("http://localhost:3001/chamados", values)
+              .then(response => {
+                console.log("Chamado criado com sucesso:", response.data);
+                window.alert("Chamado criado com sucesso!");
+                resetForm();
+
+                // Você pode redirecionar o usuário ou realizar outras ações após o sucesso
+              })
+              .catch(error => {
+                console.error("Erro ao criar chamado:", error);
+              });
           }}
         >
-          {({ handleSubmit, errors, touched }) => (
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <VStack spacing={5} align="flex-start">
                 <FormControl isRequired>
@@ -41,13 +65,18 @@ export default function App() {
 
                 <FormControl>
                   <FormLabel>Departamento</FormLabel>
-                  <Select placeholder="Selecione o Departamento">
+                  <Field
+                    as={Select}
+                    id="departamento"
+                    name="departamento"
+                    placeholder="Selecione o Departamento"
+                  >
                     <option>Saúde</option>
                     <option>Educação, Cultura e Esporte</option>
                     <option>Assistência Social</option>
                     <option>Gestão</option>
                     <option>Outro</option>
-                  </Select>
+                  </Field>
                 </FormControl>
 
                 <FormControl isRequired>

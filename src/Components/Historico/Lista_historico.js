@@ -11,13 +11,12 @@ import axios from 'axios';
 
 const Choc = () => {
   const [data, setData] = useState([]);
-  const [historico, setHistorico] = useState([]);
   const color1 = useColorModeValue("gray.400", "gray.400");
   const color2 = useColorModeValue("gray.400", "gray.400");
 
   useEffect(() => {
     // Fazer a chamada para o servidor usando Axios e atualizar o estado com os dados recebidos
-    axios.get('http://localhost:3001/chamados')
+    axios.get('http://localhost:3001/historico')
       .then(response => {
         setData(response.data);
       })
@@ -25,26 +24,6 @@ const Choc = () => {
         console.error('Erro ao obter dados do servidor:', error);
       });
   }, []);
-
-  const handleDelete = (id) => {
-    // Encontrar o chamado pelo ID
-    const chamadoExcluido = data.find(chamado => chamado.ID === id);
-
-    // Adicionar o chamado ao histórico
-    setHistorico([...historico, chamadoExcluido]);
-
-    // Remover o chamado do estado atual
-    setData(data.filter(chamado => chamado.ID !== id));
-    // Atualizar o servidor com os dados do histórico
-    axios.post('http://localhost:3001/historico', { chamado: chamadoExcluido })
-      .then(response => {
-        console.log('Chamado movido para o histórico no servidor:', response.data);
-      })
-      .catch(error => {
-        console.error('Erro ao atualizar histórico no servidor:', error);
-      });
-  };
-
 
   const header = ["ID", "Nome", "departamento", "Sobre o problema"];
 
@@ -174,17 +153,8 @@ const Choc = () => {
                             icon={<FaInfoCircle />}
                             aria-label="Up"
                          />} >
-                        <div>Aqui ficará registrado a data e hora do chamado!</div>
+                        <div>Aqui ficará escrito o "Sobre" o problema!!</div>
                     </Popup>
-                    
-                    <IconButton
-                      colorScheme="red"
-                      variant="outline"
-                      icon={<BsFillTrashFill />}
-                      aria-label="Delete"
-                      onClick={() => handleDelete(token.ID)}
-
-                    />
                   </ButtonGroup>
                 </Td>
               </Tr>

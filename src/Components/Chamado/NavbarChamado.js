@@ -3,6 +3,9 @@ import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, But
   VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
 import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
 import { BsPhone, BsFillHouseDoorFill} from "react-icons/bs";
+import { GrUserAdmin } from "react-icons/gr";
+import { GrPhone } from "react-icons/gr";
+
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
 
@@ -29,12 +32,13 @@ const Choc = () => {
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color="gray.800"
-                _dark={{ color: "inherit" }}
+                _hover={{ color: "blue"}}
                 variant="ghost"
                 icon={<AiOutlineMenu color="white" />}
                 onClick={mobileNav.onOpen}
               />
+
+              
               <VStack
                 pos="absolute"
                 top={0}
@@ -42,42 +46,58 @@ const Choc = () => {
                 right={0}
                 display={mobileNav.isOpen ? "flex" : "none"}
                 flexDirection="column"
-                p={2}
+                p={5}
                 pb={4}
                 m={2}
                 bg={bg}
-                spacing={3}
+                spacing={6}
                 rounded="sm"
                 shadow="sm"
               >
-                <CloseButton
-                  aria-label="Close menu"
-                  justifySelf="self-start"
-                  onClick={mobileNav.onClose}
-                />
-                <Button w="full" variant="ghost" leftIcon={<AiFillHome />}>
-                  Dashboard
+
+              <IconButton
+                display={{ base: "flex", md: "none" }}
+                aria-label="close menu"
+                fontSize="20px"
+                _hover={{ color: "blue"}}
+                variant="ghost"
+                icon={<AiOutlineMenu color="white" />}
+                marginLeft={{ base: "-420px", md: "0" }}
+                onClick={mobileNav.onClose}
+              />
+                       
+
+                <Button
+                  w="full"
+                  variant="solid"
+                  colorScheme="ghost"
+                  leftIcon={<GrUserAdmin color="white" />}  
+                  onClick={() => window.location.href = "./login"}
+      
+                > Administrador
+                </Button>
+                
+
+                <Button
+                  w="full"
+                  variant="solid"
+                  colorScheme="ghost"
+                  leftIcon={<BsPhone color="white" />}
+                > Abrir Chamado
                 </Button>
 
                 <Button
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<AiFillHome color="white" />}
-                >                  teste
+                  leftIcon={<GrPhone color="white" />}
+                > Contato
                 </Button>
-                <Button
-                  w="full"
-                  variant="solid"
-                  colorScheme="brand"
-                  leftIcon={<AiOutlineInbox color="white" />}
-                  
-                >                  teste
-                </Button>
+
                 
+
               </VStack>
             </Box>
-
 
             <chakra.a
               href="/"
@@ -105,7 +125,7 @@ const Choc = () => {
                 _hover={{ bg: 'green.700',transform: 'scale(1.05)',
                 transition: 'transform 0.3s ease' }} 
                 onClick={() => {
-                  window.open('https://www.manduri.sp.gov.br/fale-conosco/', '_black');
+                  window.location.href = 'https://www.manduri.sp.gov.br/fale-conosco/' ;
                 }}
 
               > Contato
