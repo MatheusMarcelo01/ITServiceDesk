@@ -2,7 +2,9 @@ import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
   VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
 import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
-import { BsPhone, BsFillHouseDoorFill } from "react-icons/bs";
+import { BsPhone, BsFillHouseDoorFill, BsClockHistory } from "react-icons/bs";
+import { GrUserAdmin } from "react-icons/gr";
+
 import { GrAddCircle } from "react-icons/gr";
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
@@ -69,7 +71,7 @@ const Choc = () => {
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<BsBriefcaseFill color="white" />}  
+                  leftIcon={<GrUserAdmin color="white" />}  
                   onClick={() => window.location.href = "./login"}
       
                 > Administrador
@@ -92,6 +94,8 @@ const Choc = () => {
                 > Contato
                 </Button>
 
+               
+
               </VStack>
             </Box>
 
@@ -109,7 +113,7 @@ const Choc = () => {
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-                <Button variant="ghost" leftIcon={<BsFillHouseDoorFill/>}
+                <Button variant="ghost" leftIcon={<GrUserAdmin/>}
                 size="sm" color="white" _hover={{ bg: 'green.700' ,transform: 'scale(1.05)' }} 
                 onClick={() => {
                   window.location.href = '/';
@@ -125,6 +129,16 @@ const Choc = () => {
                 }}
                 
               > Contato
+              </Button>
+
+              <Button
+                variant="ghost" leftIcon={<BsClockHistory/>}size="sm" color='white'  
+                _hover={{ bg: 'green.700' ,transform: 'scale(1.05)'}} 
+                onClick={() => {
+                  window.location.href = './historico';
+                }}
+                
+              > Histórico
               </Button>
 
               <Button

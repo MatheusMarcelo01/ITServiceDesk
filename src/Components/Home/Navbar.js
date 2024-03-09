@@ -169,6 +169,7 @@ const Choc = () => {
             }
 
             >
+              
               <AiFillBell style={{ fontSize: "21px" }} />
               <VisuallyHidden>Notifications</VisuallyHidden>
             </chakra.a>

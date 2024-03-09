@@ -1,8 +1,11 @@
 import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
-  VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
-import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
+  VStack,  IconButton,   InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
+import {  AiOutlineMenu,   AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
 import { BsPhone, BsFillHouseDoorFill} from "react-icons/bs";
+import { GrUserAdmin } from "react-icons/gr";
+import { GrPhone } from "react-icons/gr";
+
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
 
@@ -68,7 +71,7 @@ const Choc = () => {
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<BsBriefcaseFill color="white" />}  
+                  leftIcon={<GrUserAdmin color="white" />}  
                   onClick={() => window.location.href = "./login"}
       
                 > Administrador
@@ -87,9 +90,11 @@ const Choc = () => {
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<BsPhone color="white" />}
+                  leftIcon={<GrPhone color="white" />}
                 > Contato
                 </Button>
+
+                
 
               </VStack>
             </Box>
