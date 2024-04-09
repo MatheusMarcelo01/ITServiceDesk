@@ -1,16 +1,6 @@
 import React from "react";
 import backgroundImg from '../../Images/backgr.jpg';
-
-
-import {
-  chakra,
-  Box,
-  useColorModeValue,
-  Flex,
-  Heading,
-  Button,
-  Stack,
-} from "@chakra-ui/react";
+import {  chakra,  Box,  useColorModeValue,  Flex,  Heading,  Button,  Stack,} from "@chakra-ui/react";
 
 const Choc = () => {
   const bg = useColorModeValue("gray.800", "gray.800");

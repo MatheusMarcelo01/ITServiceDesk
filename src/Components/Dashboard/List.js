@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ButtonGroup, Flex, IconButton, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
 import { FaInfoCircle } from "react-icons/fa";
-import { BsCheck } from "react-icons/bs";
+import { BsCheck,BsFillTrashFill } from "react-icons/bs";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
@@ -12,6 +12,7 @@ import Styles from './List.module.css'; // Importe o arquivo CSS aqui
 
 const List = () => {
   const [data, setData] = useState([]);
+  // eslint-disable-next-line
   const [completedId, setCompletedId] = useState(null);
   const color1 = useColorModeValue("gray.400", "gray.400");
   const color2 = useColorModeValue("gray.400", "gray.400");
@@ -26,13 +27,48 @@ const List = () => {
       });
   }, []);
 
-  const handleDelete = (id) => {
-    if (completedId === id) {
-        setCompletedId(null); // Desmarcar o chamado se já estiver marcado
-    } else {
-        setCompletedId(id); // Marcar o chamado se não estiver marcado
+ 
+  const handleComplete = (id) => {
+    const item = data.find(item => item.id === id);
+    if (!item) {
+      return;
     }
-};
+  
+    // Enviar requisição para adicionar o item à tabela de finalizados
+    axios.post('http://localhost:3001/finalizados', item)
+      .then(response => {
+        console.log('Chamado movido para finalizados:', response.data);
+        // Remover o item da tabela de chamados após mover para finalizados
+        axios.delete(`http://localhost:3001/chamados/${id}`)
+          .then(() => {
+            console.log('Chamado removido da lista de chamados');
+            // Atualizar o estado para refletir a remoção na interface
+            setData(data.filter(item => item.id !== id));
+          })
+          .catch(error => {
+            console.error('Erro ao remover chamado da lista de chamados:', error);
+          });
+      })
+      .catch(error => {
+        console.error('Erro ao mover chamado para finalizados:', error);
+      });
+  };
+  
+
+  const handleDelete = (id) => {
+    // Enviar requisição para deletar o item
+    axios.delete(`http://localhost:3001/chamados/${id}`)
+      .then(response => {
+        console.log('Chamado deletado:', response.data);
+        // Remover o item da tabela de chamados após deletar
+        setData(data.filter(item => item.id !== id));
+      })
+      .catch(error => {
+        console.error('Erro ao deletar chamado:', error);
+      });
+  };
+
+
 
   const header = ["ID", "Nome", "departamento", "Sobre o problema"];
 
@@ -160,7 +196,7 @@ const List = () => {
                 </Td>
                 <Td>
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
-                    <Popup position="right center" variant="solid" size="sm" spacing={3}  trigger={ 
+                    <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
                         <IconButton
                             colorScheme="blue"
                             icon={<FaInfoCircle />}
@@ -170,11 +206,18 @@ const List = () => {
                     </Popup>
                     
                     <IconButton
+                      colorScheme="red"
+                      variant="outline"
+                      icon={<BsFillTrashFill />                    }
+                      aria-label="Delete"
+                      onClick={() => handleDelete(token.id)}
+                    />
+                    <IconButton
                       colorScheme="green"
                       variant="outline"
                       icon={<BsCheck />                    }
                       aria-label="Delete"
-                      onClick={() => handleDelete(token.id)}
+                      onClick={() => handleComplete(token.id)}
                     />
                     
                   </ButtonGroup>

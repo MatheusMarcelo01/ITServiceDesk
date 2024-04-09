@@ -1,8 +1,8 @@
 import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
-  VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
-import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
-import { BsPhone, BsFillHouseDoorFill, BsClockHistory } from "react-icons/bs";
+  VStack,  IconButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
+import {  AiOutlineMenu,   AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
+import { BsPhone, BsClockHistory } from "react-icons/bs";
 import { GrUserAdmin } from "react-icons/gr";
 
 import { GrAddCircle } from "react-icons/gr";
@@ -135,10 +135,10 @@ const Choc = () => {
                 variant="ghost" leftIcon={<BsClockHistory/>}size="sm" color='white'  
                 _hover={{ bg: 'green.700' ,transform: 'scale(1.05)'}} 
                 onClick={() => {
-                  window.location.href = './historico';
+                  window.location.href = './finalizados';
                 }}
                 
-              > Histórico
+              > Finalizados
               </Button>
 
               <Button

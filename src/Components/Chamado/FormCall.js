@@ -11,10 +11,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-let lastId = 0;
-function generateSequentialId() {lastId++;
-  return lastId;
-}
+
 
 export default function App() {
 
@@ -28,14 +25,8 @@ export default function App() {
             sobre: "",
           }}
           onSubmit={(values, { resetForm }) => { 
-            values.id = generateSequentialId();
             
             values.data = new Date().toLocaleString(); // Adicionando a data e hora da solicitação
-
-
-
-
-            
             // Enviar os dados para o servidor usando axios
             axios.post("http://localhost:3001/chamados", values)
               .then(response => {

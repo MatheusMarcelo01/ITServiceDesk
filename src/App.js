@@ -10,6 +10,7 @@ import Homepage from './Components/Home/Homepage'
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Chamado from './Components/Chamado/NovoChamado'
+import FinalMain from './Components/Finalizados/FinalMain'
 
 
 
@@ -33,6 +34,9 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/chamado" element={<Chamado/>} />
+                <Route path="/finalizados" element={<FinalMain/>} />
+
+
 
              </Routes>
             
