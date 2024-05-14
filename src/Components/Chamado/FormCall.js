@@ -1,14 +1,5 @@
 import { Formik, Field } from "formik";
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Select,
-  Input,
-  VStack,
-} from "@chakra-ui/react";
+import {  Box,  Button,  Flex,  FormControl,  FormLabel,  Select,  Input,  VStack,} from "@chakra-ui/react";
 import axios from "axios";
 
 
@@ -17,30 +8,36 @@ export default function App() {
 
   return (
     <Flex bg="gray.900" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md" w={["90%", 600]} h={["90%", 600]}>
+      <Box bg="white" p={6} rounded="md" w={["90%", 600]} h={["90%", 650]}>
         <Formik
           initialValues={{
             nome: "",
+            tipo: "",
             departamento: "",
             sobre: "",
           }}
           onSubmit={(values, { resetForm }) => { 
-            
             values.data = new Date().toLocaleString(); // Adicionando a data e hora da solicitação
-            // Enviar os dados para o servidor usando axios
-            axios.post("http://localhost:3001/chamados", values)
-              .then(response => {
-                console.log("Chamado criado com sucesso:", response.data);
-                window.alert("Chamado criado com sucesso!\nEntraremos em contato com seu número de ramal ou WhatsApp em breve!");
-                resetForm();
-                window.location.href = '/' ;
-
-
-                // Você pode redirecionar o usuário ou realizar outras ações após o sucesso
-              })
-              .catch(error => {
-                console.error("Erro ao criar chamado:", error);
-              });
+          
+            // Verificar o tipo de problema selecionado
+            if (values.tipos === "Problema com softwares (office, sistema, etc.)") {
+              // Se for um problema de software, exibir uma mensagem específica
+              window.alert("Chamado criado com sucesso!\n O profissional que fará seu atendimento é: João Luiz \n Aguarde contato pelo ramal ou Whatsapp!");
+              resetForm();
+              window.location.href = '/' ;
+            } else {
+              // Enviar os dados para o servidor usando axios
+              axios.post("http://localhost:3001/chamados", values)
+                .then(response => {
+                  console.log("Chamado criado com sucesso:", response.data);
+                  window.alert("Chamado criado com sucesso!\n O profissional que fará seu atendimento é: Matheus Marcelo! \n Aguarde contato pelo ramal ou Whatsapp!");
+                  resetForm();
+                  window.location.href = '/' ;
+                })
+                .catch(error => {
+                  console.error("Erro ao criar chamado:", error);
+                });
+            }
           }}
         >
           {({ handleSubmit }) => (
@@ -59,7 +56,7 @@ export default function App() {
                   />
                 </FormControl>
 
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Departamento do solicitante</FormLabel>
                   <Field
                     as={Select}
@@ -109,6 +106,30 @@ export default function App() {
 
                   </Field>
                 </FormControl>
+
+
+                <FormControl isRequired>
+                  <FormLabel>Tipo de problema</FormLabel>
+                  <Field
+                    as={Select}
+                    id="tipos"
+                    name="tipos"
+                    placeholder="Selecione o tipo de problema"
+                  >
+                      <option>Problema com internet</option>
+                      <option>Problema com sites da internet</option>
+                      <option>Problema com serviço de e-mail</option>
+                      <option>Problema com hardware (computador não liga, não funciona)</option>
+                      <option>Problema com softwares (office, sistema, etc.)</option>
+                      <option>Problema com servidor de arquivos</option>
+                      <option>Problema com impressoras</option>
+                      <option>Outro</option>
+
+
+                  </Field>
+                </FormControl>
+
+
 
                 <FormControl isRequired>
                   <FormLabel>Sobre o problema:</FormLabel>
