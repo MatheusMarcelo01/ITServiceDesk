@@ -2,17 +2,12 @@ import React from 'react';
 import { ChakraProvider,  Box, extendTheme,} from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 
-
-
-
-
+//routes
 import Homepage from './Components/Home/Homepage'
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Chamado from './Components/Chamado/NovoChamado'
 import FinalMain from './Components/Finalizados/FinalMain'
-
-
 
 const colors = {
   brand: {
@@ -35,9 +30,6 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/chamado" element={<Chamado/>} />
                 <Route path="/finalizados" element={<FinalMain/>} />
-
-
-
              </Routes>
             
           </Box>
