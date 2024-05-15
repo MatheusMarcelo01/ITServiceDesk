@@ -1,116 +1,41 @@
 {
   "finalizados": [
     {
-      "id": "2b10",
-      "nome": "Ola",
-      "departamento": "Banco do Povo/PROCON",
-      "sobre": "Teste",
-      "data": "08/04/2024, 15:07:19"
-    },
-    {
-      "id": "b170",
-      "nome": "Joice",
-      "departamento": "Engenharia/Meio Ambiente",
-      "sobre": "dwaawd",
-      "data": "08/04/2024, 15:08:46"
-    },
-    {
-      "id": "b170",
-      "nome": "Joice",
-      "departamento": "Engenharia/Meio Ambiente",
-      "sobre": "dwaawd",
-      "data": "08/04/2024, 15:08:46"
-    },
-    {
-      "id": "cb45",
-      "nome": "teste",
-      "tipo": "",
-      "departamento": "Departamento de Cultura e Esporte",
-      "sobre": "",
-      "tipos": "Problema com internet",
-      "data": "14/05/2024, 09:46:39"
-    },
-    {
-      "id": "ad00",
-      "nome": "TESTE",
-      "tipo": "",
-      "departamento": "Departamento de Saúde/Vigilância",
-      "sobre": "teste",
-      "tipos": "Problema com serviço de e-mail",
-      "data": "14/05/2024, 09:51:36"
-    },
-    {
-      "id": "c82f",
-      "nome": "teste",
-      "tipo": "",
-      "departamento": "Policlínica",
-      "sobre": "dwawad",
-      "tipos": "Problema com hardware (computador não liga, não funciona)",
-      "data": "14/05/2024, 09:51:44"
-    },
-    {
-      "id": "1d1c",
-      "nome": "teste",
-      "tipo": "",
-      "departamento": "Departamento de Saúde/Vigilância",
-      "sobre": "tes",
-      "tipos": "Problema com hardware (computador não liga, não funciona)",
-      "data": "14/05/2024, 09:52:05"
-    },
-    {
-      "id": "9fbb",
-      "nome": "wfd",
-      "tipo": "",
-      "departamento": "Departamento de Saúde/Vigilância",
-      "sobre": "fwaafw",
-      "tipos": "Problema com serviço de e-mail",
-      "data": "14/05/2024, 09:54:28"
-    },
-    {
-      "id": "15fe",
-      "nome": "fwawfawfaawfteste",
-      "tipo": "",
-      "departamento": "UBS Ademar Holtz",
-      "sobre": "ffawawf",
-      "tipos": "Problema com internet",
-      "data": "14/05/2024, 09:56:16"
-    },
-    {
-      "id": "02c0",
-      "nome": "teste",
-      "tipo": "",
-      "departamento": "Departamento de Saúde/Vigilância",
-      "sobre": "teste",
-      "tipos": "Outro",
-      "data": "14/05/2024, 10:17:57"
-    },
-    {
-      "id": "0451",
-      "nome": "teste",
-      "tipo": "",
-      "departamento": "UBS Maria Inês",
-      "sobre": "test",
-      "tipos": "Problema com servidor de arquivos",
-      "data": "14/05/2024, 10:29:49"
-    },
-    {
-      "id": "6007",
-      "nome": "Teste123",
-      "tipo": "",
-      "departamento": "Departamento de Saúde/Vigilância",
-      "sobre": "teste123",
-      "tipos": "Problema com serviço de e-mail",
-      "data": "15/05/2024, 09:52:26"
-    }
-  ],
-  "chamados": [
-    {
       "id": "64ff",
       "nome": "Jonas",
       "tipos": "Problema com sites da internet",
       "departamento": "Departamento de Saúde/Vigilância",
       "sobre": "não consigo entrar no YTT",
       "data": "15/05/2024, 10:49:20",
+      "tecnico": "Matheus Marcelo"
+    }
+  ],
+  "chamados": [
+    {
+      "id": "bf36",
+      "nome": "Jubileu",
+      "tipos": "Problema com internet",
+      "departamento": "UBS Maria Inês",
+      "sobre": "Meu pc não esta conectando na net\n",
+      "data": "15/05/2024, 10:56:34",
+      "tecnico": "Matheus Marcelo"
+    },
+    {
+      "id": "9329",
+      "nome": "Ronaldo",
+      "tipos": "Problema com servidor de arquivos",
+      "departamento": "Prefeitura",
+      "sobre": "Não consigo acessar a pasta da rede",
+      "data": "15/05/2024, 10:56:49",
+      "tecnico": "Matheus Marcelo"
+    },
+    {
+      "id": "cba3",
+      "nome": "Juliana",
+      "tipos": "Problema com impressoras",
+      "departamento": "Departamento de Educação",
+      "sobre": "MInha impressora esta enroscando.",
+      "data": "15/05/2024, 10:57:06",
       "tecnico": "Matheus Marcelo"
     }
   ]
