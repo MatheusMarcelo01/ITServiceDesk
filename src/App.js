@@ -8,7 +8,7 @@ import Login from './Components/Login/Login';
 import Chamado from './Components/Chamado/NovoChamado'
 import FinalMain from './Components/Finalizados/FinalMain'
 
-
+//Token
 const isAuthenticated = () => {
   // Verifica se há um token de autenticação no localStorage
   return localStorage.getItem("token") !== null;
