@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../Home/Footer';
-import FormLogin from '../Login/FormLogin'
-import NavbarLogin from '../Login/NavbarLogin'
+import FormLogin from './FormLogin'
+import NavbarLogin from './NavbarLogin'
 
 
 

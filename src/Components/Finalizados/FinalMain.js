@@ -1,5 +1,5 @@
-import NavbarFinal from '../Finalizados/NavBarFinal';
-import Finalizados from '../Finalizados/Finalizados';
+import NavbarFinal from './NavBarFinal';
+import Finalizados from './Finalizados';
 
 function FinalMain() {
     return (

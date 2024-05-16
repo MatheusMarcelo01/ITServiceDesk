@@ -34,15 +34,12 @@ const List = () => {
       return;
     }
   
-    // Enviar requisição para adicionar o item à tabela de finalizados
     axios.post('http://localhost:3001/finalizados', item)
       .then(response => {
         console.log('Chamado movido para finalizados:', response.data);
-        // Remover o item da tabela de chamados após mover para finalizados
         axios.delete(`http://localhost:3001/chamados/${id}`)
           .then(() => {
             console.log('Chamado removido da lista de chamados');
-            // Atualizar o estado para refletir a remoção na interface
             setData(data.filter(item => item.id !== id));
           })
           .catch(error => {
@@ -70,7 +67,9 @@ const List = () => {
 
 
 
-  const header = ["ID", "Nome", "Tipo de problema", "Departamento", "Sobre o problema", "Técnico"];
+  const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável"];
+  const reversedData = [...data].reverse(); // Criar uma cópia reversa dos dados
+
 
   return (
     <Flex
@@ -94,6 +93,7 @@ const List = () => {
             display: "table",
           },
         }}
+        
       >
         <Thead
           display={{
@@ -123,7 +123,9 @@ const List = () => {
             },
           }}
         >
-          {data.map((token, tid) => {
+        
+          {reversedData.map((token, tid) => {
+
             const { data, ...otherData } = token;
 
             return (

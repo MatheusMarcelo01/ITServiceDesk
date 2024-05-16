@@ -39,7 +39,7 @@ const Choc = () => {
               color="white"
               textTransform="uppercase"
             >
-              Abra agora o seu  {" "} 
+              Abra aqui o seu  {" "} 
               <chakra.span color="green.600" textDecor="underline">
               chamado  
               </chakra.span>{" "}

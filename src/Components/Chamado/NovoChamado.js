@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../Home/Footer';
-import FormCall from '../Chamado/FormCall'
-import NavbarChamado from '../Chamado/NavbarChamado'
+import FormCall from './FormCall'
+import NavbarChamado from './NavbarChamado'
 
 
 

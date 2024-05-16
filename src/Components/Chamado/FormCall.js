@@ -1,39 +1,42 @@
 import { Formik, Field } from "formik";
-import { Box, Button, Flex, FormControl, FormLabel, Select, Input, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, FormControl, FormLabel, Select, Input, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 
 export default function App() {
   const [submitting, setSubmitting] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    setModalContent(content);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    window.location.href = '/'; // Redirecionar para a home
+  };
+
 
   const handleSubmit = async (values, { resetForm }) => {
     setSubmitting(true);
 
     try {
-      console.log("Valores do formulário:", values); // Adiciona um log dos valores do formulário
-
-      // Adicionando a data e hora da solicitação
       values.data = new Date().toLocaleString();
-
-      console.log("Dados a serem salvos:", values); // Adiciona um log dos dados a serem salvos
-
-      let tecnico = "Matheus Marcelo"; // Define o técnico padrão
-
-      // Verifica se o tipo de problema é Liberação de site bloqueado ou Problema com softwares
+      let tecnico = "Matheus Marcelo";
       if (values.tipos === "Liberação de site bloqueado (para curso como Youtube, etc)" || values.tipos === "Problema com softwares (office, sistema, etc.)") {
-        tecnico = "João Luiz"; // Define o técnico como João Luiz se for um desses tipos de problema
+        tecnico = "João Luiz"; 
       }
-
-      // Adiciona o técnico aos valores do formulário
       values.tecnico = tecnico;
 
-      // Enviar os dados para o servidor usando axios (JSON Server)
       axios.post("http://localhost:3001/chamados", values)
         .then(response => {
-          console.log("Chamado criado com sucesso:", response.data);
-          window.alert(`Chamado criado com sucesso!\n O profissional que fará seu atendimento é: ${tecnico}! \n Aguarde contato pelo ramal ou Whatsapp!`);
-          resetForm();
-          window.location.href = '/';
+          
+          const content = `Chamado criado com sucesso!<br />O profissional que fará seu atendimento é: <br /> <strong>${tecnico}</strong>!<br />Aguarde retorno pelo ramal ou E-mail!`;
+          handleOpenModal(content);
+          //resetForm();
+          // window.location.href = '/'; // Evite redirecionar automaticamente, pode ser confuso para o usuário
         })
         .catch(error => {
           console.error("Erro ao criar chamado:", error);
@@ -47,11 +50,12 @@ export default function App() {
 
   return (
     <Flex bg="gray.900" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md" w={["90%", 600]} h={["90%", 650]}>
+      <Box bg="white" p={6} rounded="md" w={["90%", 600]} h={["90%", 700]}>
         <Formik
           initialValues={{
             nome: "",
-            tipos: "", // Renomeado de "tipo" para "tipos" para corresponder ao nome do campo no formulário
+            email: "",
+            tipos: "", 
             departamento: "",
             sobre: "",
           }}
@@ -70,6 +74,19 @@ export default function App() {
                     variant="filled"
                     borderColor="gray.600"
                     placeholder="Seu nome"
+                  />
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel>E-mail Institucional:</FormLabel>
+                  <Field
+                    as={Input}
+                    id="email"
+                    name="email"
+                    type="email"
+                    variant="filled"
+                    borderColor="gray.600"
+                    placeholder="Digite o e-mail institucional do seu departamento"
                   />
                 </FormControl>
 
@@ -127,12 +144,12 @@ export default function App() {
 
 
                 <FormControl isRequired>
-                  <FormLabel>Tipo de problema</FormLabel>
+                  <FormLabel>Tipo de solicitação</FormLabel>
                   <Field
                     as={Select}
                     id="tipos"
                     name="tipos"
-                    placeholder="Selecione o tipo de problema"
+                    placeholder="Selecione o tipo de solicitação"
                   >
                       <option>Problema com internet</option>
                       <option>Problema com sites da internet</option>
@@ -151,7 +168,7 @@ export default function App() {
 
 
                 <FormControl isRequired>
-                  <FormLabel>Sobre o problema:</FormLabel>
+                  <FormLabel>Descreva o problema:</FormLabel>
                   <Field
                     as="textarea"
                     placeholder="Escreva um pouco sobre o problema que está enfrentando"
@@ -175,6 +192,22 @@ export default function App() {
             </form>
           )}
         </Formik>
+        {/* Modal */}
+      <Modal isOpen={modalOpen} onClose={handleCloseModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Informações do Chamado</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody dangerouslySetInnerHTML={{ __html: modalContent }} />
+
+            
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleCloseModal}>
+              Fechar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       </Box>
     </Flex>
   );
