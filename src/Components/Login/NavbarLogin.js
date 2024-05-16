@@ -1,7 +1,7 @@
 import React from "react";
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
-  VStack,  IconButton,  CloseButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
-import {  AiOutlineMenu,  AiFillHome,  AiOutlineInbox,  AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
+  VStack,  IconButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
+import {  AiOutlineMenu, AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
 import { BsPhone, } from "react-icons/bs";
 import { GrUserAdmin } from "react-icons/gr";
 

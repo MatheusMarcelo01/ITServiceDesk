@@ -7,6 +7,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Chamado from './Components/Chamado/NovoChamado'
 import FinalMain from './Components/Finalizados/FinalMain'
+import Contato from './Components/Contato/Contato';
 
 
 const isAuthenticated = () => {
@@ -38,6 +39,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage/>} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/contato" element={<Contato />} />
+
                 <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />}/>
                 <Route path="*" element={<Navigate to="/login" />} />
 

@@ -126,7 +126,7 @@ const Choc = () => {
                 _hover={{ bg: 'green.700',transform: 'scale(1.05)',
                 transition: 'transform 0.3s ease'}} 
                 onClick={() => {
-                  window.location.href = 'https://www.manduri.sp.gov.br/fale-conosco/';
+                  window.location.href = './contato';
                 }}
 
               > Contato

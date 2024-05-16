@@ -120,10 +120,10 @@ const CompanyFooter = () => {
           </Link>
         
         </HStack>
-
-        <Text textAlign="center" fontSize="smaller" color= "white" _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>
-          &copy;Todos os direitos reservados. 
+        <Text textAlign="center" fontSize="smaller" color="white" _hover={{ color: "green.600", _dark: { color: "gray.600" } }}>
+            Desenvolvido por <a href="https://github.com/MatheusMarcelo01/ITServiceDesk">Matheus Marcelo</a>&copy; Todos os direitos reservados.
         </Text>
+
       </VStack>
     </Box>
   );

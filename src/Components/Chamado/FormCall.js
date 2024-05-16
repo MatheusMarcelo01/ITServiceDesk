@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect} from "react";
 
 export default function App() {
+  // eslint-disable-next-line
   const [submitting, setSubmitting] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -128,7 +129,7 @@ export default function App() {
 
                     </optgroup>
                     <optgroup label="Gestão">
-                      <option>Prefeitura</option>
+                      <option>Administrativo (Tributos,RH,Sec,Tes,etc...)</option>
                       <option>Jurídico</option>
                       <option>Engenharia/Meio Ambiente</option>
                       <option>Banco do Povo/PROCON</option>
