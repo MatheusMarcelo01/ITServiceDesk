@@ -1,12 +1,24 @@
 import { Formik, Field } from "formik";
 import { Box, Button, Flex, FormControl, FormLabel, Select, Input, VStack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 
 export default function App() {
   const [submitting, setSubmitting] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [numChamados, setNumChamados] = useState(0);
+
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/chamados")
+      .then(response => {
+        setNumChamados(response.data.length);
+      })
+      .catch(error => {
+        console.error("Erro ao obter lista de chamados:", error);
+      });
+  }, []);
 
   const handleOpenModal = (content) => {
     setModalContent(content);
@@ -33,10 +45,16 @@ export default function App() {
       axios.post("http://localhost:3001/chamados", values)
         .then(response => {
           
-          const content = `Chamado criado com sucesso!<br />O profissional que fará seu atendimento é: <br /> <strong>${tecnico}</strong>!<br />Aguarde retorno pelo ramal ou E-mail!`;
+          
+          const content = `Seu chamado foi criado com sucesso!<br/>
+          O profissional responsável pelo seu atendimento será: <br /> 
+          <strong>${tecnico}</strong>!<br /><br />
+          <strong style="text-align: center;"><span style="font-size: 22px; color: red;">ATENÇÃO</span><br/>
+          Você é o <span style="font-size: 20px; color: red;">${numChamados + 1}º</span> na fila de atendimento.</strong><br/><br/>
+          Aguarde retorno pelo seu e-mail institucional!`;
+
+          
           handleOpenModal(content);
-          //resetForm();
-          // window.location.href = '/'; // Evite redirecionar automaticamente, pode ser confuso para o usuário
         })
         .catch(error => {
           console.error("Erro ao criar chamado:", error);
