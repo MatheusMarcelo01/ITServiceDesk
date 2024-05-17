@@ -27,6 +27,8 @@ const List = () => {
       });
   }, []);
 
+  
+
  
   const handleComplete = (id) => {
     const item = data.find(item => item.id === id);
@@ -53,19 +55,19 @@ const List = () => {
   
 
   const handleDelete = (id) => {
-    // Enviar requisição para deletar o item
-    axios.delete(`http://localhost:3001/chamados/${id}`)
-      .then(response => {
-        console.log('Chamado deletado:', response.data);
-        // Remover o item da tabela de chamados após deletar
-        setData(data.filter(item => item.id !== id));
-      })
-      .catch(error => {
-        console.error('Erro ao deletar chamado:', error);
-      });
+    const confirmDelete = window.confirm("Deseja realmente excluir este chamado?");
+  
+    if (confirmDelete) {
+      axios.delete(`http://localhost:3001/chamados/${id}`)
+        .then(response => {
+          console.log('Chamado deletado:', response.data);
+          setData(data.filter(item => item.id !== id));
+        })
+        .catch(error => {
+          console.error('Erro ao deletar chamado:', error);
+        });
+    }
   };
-
-
 
   const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável"];
   const reversedData = [...data].reverse(); // Criar uma cópia reversa dos dados
@@ -198,7 +200,17 @@ const List = () => {
                 </Td>
                 <Td>
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
-                    <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
+                   
+                    
+                   
+                    <IconButton
+                      colorScheme="green"
+                      variant="outline"
+                      icon={<BsCheck />                    }
+                      aria-label="Delete"
+                      onClick={() => handleComplete(token.id)}
+                    />
+                     <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
                         <IconButton
                             colorScheme="blue"
                             icon={<FaInfoCircle />}
@@ -206,20 +218,12 @@ const List = () => {
                          />} >
                         <div>Data e hora do chamado: {token.data}</div>
                     </Popup>
-                    
-                    <IconButton
+                     <IconButton
                       colorScheme="red"
                       variant="outline"
                       icon={<BsFillTrashFill />                    }
                       aria-label="Delete"
                       onClick={() => handleDelete(token.id)}
-                    />
-                    <IconButton
-                      colorScheme="green"
-                      variant="outline"
-                      icon={<BsCheck />                    }
-                      aria-label="Delete"
-                      onClick={() => handleComplete(token.id)}
                     />
                     
                   </ButtonGroup>
