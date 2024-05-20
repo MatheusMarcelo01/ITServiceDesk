@@ -12,7 +12,7 @@ export default function App() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:3001/chamados")
+    axios.get("http://192.168.0.98:3001/chamados")
       .then(response => {
         setNumChamados(response.data.length);
       })
@@ -34,28 +34,35 @@ export default function App() {
 
   const handleSubmit = async (values, { resetForm }) => {
     setSubmitting(true);
-
+  
     try {
+      // Adicionando a data e o técnico aos valores do formulário
       values.data = new Date().toLocaleString();
       let tecnico = "Matheus Marcelo";
       if (values.tipos === "Liberação de site bloqueado (para curso como Youtube, etc)" || values.tipos === "Problema com softwares (office, sistema, etc.)") {
         tecnico = "João Luiz"; 
       }
       values.tecnico = tecnico;
-
-      axios.post("http://localhost:3001/chamados", values)
-        .then(response => {
+  
+      // Enviar dados do formulário para o backend e também enviar email
+      axios.post("http://192.168.0.98:3001/chamados", values)
+        .then(async (response) => {
+          // Incrementar o número de chamados
+          setNumChamados(numChamados + 1);
           
-          
+          // Montar o conteúdo do email
           const content = `Seu chamado foi criado com sucesso!<br/>
           O profissional responsável pelo seu atendimento será: <br /> 
           <strong>${tecnico}</strong>!<br /><br />
           <strong style="text-align: center;"><span style="font-size: 22px; color: red;">ATENÇÃO</span><br/>
           Você é o <span style="font-size: 20px; color: red;">${numChamados + 1}º</span> na fila de atendimento.</strong><br/><br/>
           Aguarde retorno pelo seu e-mail institucional!`;
-
-          
+  
+          // Abrir modal com as informações
           handleOpenModal(content);
+  
+          // Enviar email
+          await axios.post("http://192.168.0.98:3002/chamados", { ...values, tecnico }); 
         })
         .catch(error => {
           console.error("Erro ao criar chamado:", error);
@@ -66,6 +73,7 @@ export default function App() {
       setSubmitting(false);
     }
   };
+
 
   return (
     <Flex bg="gray.900" align="center" justify="center" h="100vh">
