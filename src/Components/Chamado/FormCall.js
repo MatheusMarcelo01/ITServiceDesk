@@ -28,7 +28,7 @@ export default function App() {
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    window.location.href = '/'; // Redirecionar para a home
+    window.location.href = '/'; 
   };
 
 
@@ -36,7 +36,6 @@ export default function App() {
     setSubmitting(true);
   
     try {
-      // Adicionando a data e o técnico aos valores do formulário
       values.data = new Date().toLocaleString();
       let tecnico = "Matheus Marcelo";
       if (values.tipos === "Liberação de site bloqueado (para curso como Youtube, etc)" || values.tipos === "Problema com softwares (office, sistema, etc.)") {
@@ -47,10 +46,8 @@ export default function App() {
       // Enviar dados do formulário para o backend e também enviar email
       axios.post("http://192.168.0.98:3001/chamados", values)
         .then(async (response) => {
-          // Incrementar o número de chamados
           setNumChamados(numChamados + 1);
           
-          // Montar o conteúdo do email
           const content = `Seu chamado foi criado com sucesso!<br/>
           O profissional responsável pelo seu atendimento será: <br /> 
           <strong>${tecnico}</strong>!<br /><br />
@@ -58,9 +55,8 @@ export default function App() {
           Você é o <span style="font-size: 20px; color: red;">${numChamados + 1}º</span> na fila de atendimento.</strong><br/><br/>
           Aguarde retorno pelo seu e-mail institucional!`;
   
-          // Abrir modal com as informações
           handleOpenModal(content);
-  
+
           // Enviar email
           await axios.post("http://192.168.0.98:3002/chamados", { ...values, tecnico }); 
         })
@@ -136,23 +132,31 @@ export default function App() {
                       <option>Fisioterapia</option>
 
                     </optgroup>
-                    <optgroup label="Gestão">
-                      <option>Administrativo (Tributos,RH,Sec,Tes,etc...)</option>
+                    <optgroup label="Gestão / Administrativo">
+                      <option>Secretaria / Gabinete</option>
+                      <option>Jurídico</option>
+                      <option>Gestão</option>
+                      <option>Compras / Contabilidade</option>
+                      <option>Cadastro e Tributos</option>
+                      <option>RH</option>
+                      <option>Transportes Educação</option>
+                      <option>Licitação</option>
+                      <option>Tesouraria</option>
                       <option>Jurídico</option>
                       <option>Engenharia/Meio Ambiente</option>
                       <option>Banco do Povo/PROCON</option>
                       <option>Acessa/Correio SP São Berto</option>
-
-
                     </optgroup>
                     <optgroup label="Educação, Cultura e Esporte">
                       <option>Departamento de Educação</option>
                       <option>Departamento de Cultura e Esporte</option>
-                      <option>Escola Hermelindo </option>
-                      <option>Escola Zoroastro </option>
-                      <option>Creche Alice </option>
-                      <option>Creche Arlette </option>
-                      <option>Creche José Manoel </option>
+                      <option>Escola Hermelindo Prestes </option>
+                      <option>Escola Zoroastro Alves</option>
+                      <option>Creche Alice Menezes</option>
+                      <option>Creche Arlette Meli </option>
+                      <option>Escola José Manoel </option>
+                      <option>Creche São Berto </option>
+
                     </optgroup>
                    
                     <optgroup label="Assistência Social">

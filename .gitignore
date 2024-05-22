@@ -2,6 +2,7 @@
 
 users.js
 auth.js
+db.json
 
 # dependencies
 /node_modules

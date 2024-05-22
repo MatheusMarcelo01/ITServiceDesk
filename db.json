@@ -149,7 +149,8 @@
       "departamento": "Escola Zoroastro",
       "sobre": "69999",
       "data": "20/05/2024, 15:19:30",
-      "tecnico": "Matheus Marcelo"
+      "tecnico": "Matheus Marcelo",
+      "assignedTechnician": "João"
     },
     {
       "id": "6b36",
@@ -159,7 +160,8 @@
       "departamento": "Escola Zoroastro",
       "sobre": "teste153511515",
       "data": "20/05/2024, 15:20:48",
-      "tecnico": "Matheus Marcelo"
+      "tecnico": "Matheus Marcelo",
+      "assignedTechnician": "Matheus"
     }
   ]
 }
