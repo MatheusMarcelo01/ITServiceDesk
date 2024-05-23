@@ -77,11 +77,8 @@ const CompanyFooter = () => {
 
           </Flex>
           <Flex justify="start" direction="column">
-            <Link href="https://www.manduri.sp.gov.br/fale-conosco/" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Contato</Link>
-            <Link href="https://www.google.com/maps/place/23%C2%B000'12.5%22S+49%C2%B019'08.3%22W/@-23.003464,-49.3189715,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-23.003464!4d-49.3189715?entry=ttu" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Localização</Link>
-
-
-
+            <Link href="https://anydesk.com/pt/downloads/thank-you?dv=win_exe" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Dowload Anydesk</Link>
+            <Link href="https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.exe" isExternal _hover={{ color: "green.600", transform: "translateX(5px)", _dark: { color: "gray.600" } }}>Download RustDesk</Link>
           </Flex>
         </HStack>
       </Stack>
@@ -92,8 +89,6 @@ const CompanyFooter = () => {
         _dark={{ color: "#F9FAFB" }}
         h="3.5px"
       />
-
-
 
       <VStack py={3}>
         <HStack justify="center">

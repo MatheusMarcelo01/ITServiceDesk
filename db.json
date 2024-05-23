@@ -109,7 +109,7 @@
       "departamento": "Departamento de Cultura e Esporte",
       "sobre": "teste",
       "data": "20/05/2024, 15:06:48",
-      "tecnico": "Matheus Marcelo"
+      "tecnico": "João"
     },
     {
       "id": "5a6b",
@@ -119,48 +119,7 @@
       "departamento": "Escola Zoroastro",
       "sobre": "teste",
       "data": "20/05/2024, 15:07:39",
-      "tecnico": "Matheus Marcelo"
-    },
-    {
-      "id": "37a7",
-      "nome": "YYYY",
-      "email": "cpd@manduri.sp.gov.br",
-      "tipos": "Problema com internet",
-      "departamento": "Escola Hermelindo",
-      "sobre": "589",
-      "data": "20/05/2024, 15:08:55",
-      "tecnico": "Matheus Marcelo"
-    },
-    {
-      "id": "372d",
-      "nome": "Rodolfo",
-      "email": "cpd@manduri.sp.gov.br",
-      "tipos": "Problema com softwares (office, sistema, etc.)",
-      "departamento": "Escola Hermelindo",
-      "sobre": "tes",
-      "data": "20/05/2024, 15:18:17",
-      "tecnico": "João Luiz"
-    },
-    {
-      "id": "7d35",
-      "nome": "YYYY",
-      "email": "cpd@manduri.sp.gov.br",
-      "tipos": "Problema com internet",
-      "departamento": "Escola Zoroastro",
-      "sobre": "69999",
-      "data": "20/05/2024, 15:19:30",
-      "tecnico": "Matheus Marcelo",
-      "assignedTechnician": "João"
-    },
-    {
-      "id": "6b36",
-      "nome": "teste de emal",
-      "email": "cpd@manduri.sp.gov.br",
-      "tipos": "Problema com internet",
-      "departamento": "Escola Zoroastro",
-      "sobre": "teste153511515",
-      "data": "20/05/2024, 15:20:48",
-      "tecnico": "Matheus Marcelo",
+      "tecnico": "João",
       "assignedTechnician": "Matheus"
     }
   ]
