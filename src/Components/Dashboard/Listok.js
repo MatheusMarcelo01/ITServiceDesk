@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { ButtonGroup, Flex, IconButton, Table, Tbody, Box, Text,Td, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
+import { ButtonGroup, Flex, IconButton, Table, Tbody, Td, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
 import { FaInfoCircle } from "react-icons/fa";
-import { BsCheck,BsFillTrashFill, BsCheckCircle, BsTools } from "react-icons/bs";
-
+import { BsCheck,BsFillTrashFill } from "react-icons/bs";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
 import Styles from './List.module.css'; // Importe o arquivo CSS aqui
 
+
+
+
 const List = () => {
   const [data, setData] = useState([]);
-  const [pendingByMatheus, setPendingByMatheus] = useState(0);
-  const [pendingByJoao, setPendingByJoao] = useState(0);
-  const [completedByMatheus, setCompletedByMatheus] = useState(0);
-  const [completedByJoao, setCompletedByJoao] = useState(0);
   // eslint-disable-next-line
   const [completedId, setCompletedId] = useState(null);
   const color1 = useColorModeValue("gray.400", "gray.400");
@@ -23,34 +21,15 @@ const List = () => {
     axios.get('http://192.168.0.98:3001/chamados')
       .then(response => {
         setData(response.data);
-        const matheusPending = response.data.filter(item => item.tecnico === "Matheus Marcelo" && !item.completed).length;
-        const joaoPending = response.data.filter(item => item.tecnico === "João Luiz" && !item.completed).length;
-
-        console.log("Chamados abertos para Matheus:", matheusPending); 
-        console.log("Chamados abertos para João:", joaoPending); 
-        
-        setPendingByMatheus(matheusPending);
-        setPendingByJoao(joaoPending);
       })
       .catch(error => {
         console.error('Erro ao obter dados do servidor:', error);
       });
-
-    axios.get('http://192.168.0.98:3001/finalizados')
-      .then(response => {
-        const matheusCompleted = response.data.filter(item => item.tecnico === "Matheus Marcelo").length;
-        const joaoCompleted = response.data.filter(item => item.tecnico === "João Luiz").length;
-
-        console.log("Atendimentos finalizados por Matheus:", matheusCompleted); 
-        console.log("Atendimentos finalizados por João:", joaoCompleted); // Adicionando um log para verificar a contagem de atendimentos finalizados por João
-        setCompletedByMatheus(matheusCompleted);
-        setCompletedByJoao(joaoCompleted);
-      })
-      .catch(error => {
-        console.error('Erro ao obter dados de atendimentos finalizados:', error);
-      });
   }, []);
 
+  
+
+ 
   const handleComplete = (id) => {
     const confirmComplete = window.confirm("Esse chamado foi finalizado com sucesso!");
 
@@ -76,6 +55,7 @@ const List = () => {
       });
   };
   
+
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("Deseja realmente excluir este chamado?");
   
@@ -94,6 +74,7 @@ const List = () => {
   const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável"];
   const reversedData = [...data].reverse(); // Criar uma cópia reversa dos dados
 
+
   return (
     <Flex
       w="full"
@@ -102,44 +83,7 @@ const List = () => {
       p={50}
       alignItems="center"
       justifyContent="center"
-      flexDirection="column"
     >
-
-
-<Flex mt="-10" ml="1000" flexDirection={{ base: "column", md: "row" }} justifyContent="center" alignItems="center">
-  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center">
-    <Text fontWeight="bold" mb={2}>Chamados Matheus:</Text>
-    <Flex align="center">
-      <BsTools />
-      <Text ml={1} mr={1}>Chamados abertos:</Text>
-      <Text color="red">{pendingByMatheus}</Text>
-    </Flex>
-    <Flex align="center" mt={2}>
-      <BsCheckCircle />
-      <Text ml={1} mr={1}>Chamados finalizados:</Text>
-      <Text color="blue">{completedByMatheus}</Text>
-    </Flex>
-  </Box>
-  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center">
-    <Text fontWeight="bold" mb={2}>Chamados João:</Text>
-    <Flex align="center">
-      <BsTools />
-      <Text ml={1} mr={1}>Chamados abertos:</Text>
-      <Text color="red">{pendingByJoao}</Text>
-    </Flex>
-    <Flex align="center" mt={2}>
-      <BsCheckCircle />
-      <Text ml={1} mr={1}>Chamados finalizados:</Text>
-      <Text color="blue">{completedByJoao}</Text>
-    </Flex>
-  </Box>
-</Flex>
-
-
-      
-
-
-
       <Table
         w="full"
         bg="white"
@@ -153,8 +97,8 @@ const List = () => {
             display: "table",
           },
         }}
+        
       >
-        {/* Cabeçalho da tabela */}
         <Thead
           display={{
             base: "none",
@@ -172,7 +116,6 @@ const List = () => {
             ))}
           </Tr>
         </Thead>
-        {/* Corpo da tabela */}
         <Tbody
           display={{
             base: "block",
@@ -184,7 +127,9 @@ const List = () => {
             },
           }}
         >
+        
           {reversedData.map((token, tid) => {
+
             const { data, ...otherData } = token;
 
             return (
@@ -203,7 +148,7 @@ const List = () => {
                 }}
                 className={token.id === completedId ? Styles.completed : ''}
               >
-                {/* Renderizando dados da linha */}
+
                 {Object.keys(otherData).map((x) => {
                   return (
                     <React.Fragment key={`${tid}${x}`}>
@@ -236,7 +181,6 @@ const List = () => {
                     </React.Fragment>
                   );
                 })}
-                {/* Ações */}
                 <Td
                   display={{
                     base: "table-cell",
@@ -258,28 +202,32 @@ const List = () => {
                 </Td>
                 <Td>
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
+                   
+                    
+                   
                     <IconButton
                       colorScheme="green"
                       variant="outline"
-                      icon={<BsCheck />}
+                      icon={<BsCheck />                    }
                       aria-label="Delete"
                       onClick={() => handleComplete(token.id)}
                     />
-                    <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
-                      <IconButton
-                        colorScheme="blue"
-                        icon={<FaInfoCircle />}
-                        aria-label="Up"
-                      />} >
-                      <div>Data e hora do chamado: {token.data}</div>
+                     <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
+                        <IconButton
+                            colorScheme="blue"
+                            icon={<FaInfoCircle />}
+                            aria-label="Up"
+                         />} >
+                        <div>Data e hora do chamado: {token.data}</div>
                     </Popup>
-                    <IconButton
+                     <IconButton
                       colorScheme="red"
                       variant="outline"
-                      icon={<BsFillTrashFill />}
+                      icon={<BsFillTrashFill />                    }
                       aria-label="Delete"
                       onClick={() => handleDelete(token.id)}
                     />
+                    
                   </ButtonGroup>
                 </Td>
               </Tr>
