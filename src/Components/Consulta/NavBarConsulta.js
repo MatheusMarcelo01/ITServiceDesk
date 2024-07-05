@@ -1,20 +1,32 @@
 import React from "react";
-
-
-
 import {  chakra,  Box,  Flex,  useColorModeValue,  VisuallyHidden,  HStack, Button,  useDisclosure,
-  VStack,  IconButton,   InputGroup,  InputLeftElement, Input,  Avatar,} from "@chakra-ui/react";
+  VStack,  IconButton,  InputGroup,  InputLeftElement,Input,  Avatar,} from "@chakra-ui/react";
 import {  AiOutlineMenu,   AiOutlineSearch,  AiFillBell,} from "react-icons/ai";
-import { BsPhone, BsBriefcaseFill, BsSearch} from "react-icons/bs";
+import { BsPhone, BsClockHistory } from "react-icons/bs";
+import { GrUserAdmin } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
+
+
 import { GrAddCircle } from "react-icons/gr";
 import MinhaImagem from "../../Images/image.png"
 import Logo from "../../Images/logo.png"
 
 
+
+
 const Choc = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Limpa o token de autenticação do localStorage
+    localStorage.removeItem("token");
+    // Redireciona o usuário para a página de login
+    navigate("/login");
+  };
   const bg = useColorModeValue("gray.800", "gray.200");
   const mobileNav = useDisclosure();
-  
+
   return (
     <React.Fragment>
       <chakra.header
@@ -24,13 +36,10 @@ const Choc = () => {
         py={4}
         shadow="md"
       >
-        
-
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <HStack display="flex" spacing={3} alignItems="center">
             <Box display={{ base: "inline-flex", md: "none" }}>
-            
-             <IconButton
+              <IconButton
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
@@ -73,7 +82,7 @@ const Choc = () => {
                   w="full"
                   variant="solid"
                   colorScheme="ghost"
-                  leftIcon={<BsBriefcaseFill color="white" />}  
+                  leftIcon={<GrUserAdmin color="white" />}  
                   onClick={() => window.location.href = "./login"}
       
                 > Administrador
@@ -96,8 +105,11 @@ const Choc = () => {
                 > Contato
                 </Button>
 
+               
+
               </VStack>
             </Box>
+
 
 
             <chakra.a
@@ -106,52 +118,42 @@ const Choc = () => {
               display="flex"
               alignItems="center"
             >
-              <chakra.img src={Logo} alt="Logo" boxSize="60px" objectFit="cover"_hover={{ transform: 'scale(1.05)',transition: 'transform 0.3s ease'}}/>
+              <chakra.img src={Logo} alt="Logo" boxSize="60px" objectFit="cover" _hover={{ transform: 'scale(1.05)',transition: 'transform 0.3s ease'}}/>
 
               <VisuallyHidden>Choc</VisuallyHidden>
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-                <Button variant="ghost" leftIcon={<BsBriefcaseFill/>}
-                size="sm" color="white" _hover={{ bg: 'green.700',transform: 'scale(1.05)',
-                transition: 'transform 0.3s ease' }} 
+                <Button variant="ghost" leftIcon={<GrUserAdmin/>}
+                size="sm" color="white" _hover={{ bg: 'green.700' ,transform: 'scale(1.05)' }} 
                 onClick={() => {
-                  window.location.href = './Login';
+                  window.location.href = '/';
                 }}
-                > Administrador
+                > Home
                 </Button>
              
               <Button
                 variant="ghost" leftIcon={<BsPhone/>}size="sm" color='white'  
-                _hover={{ bg: 'green.700',transform: 'scale(1.05)',
-                transition: 'transform 0.3s ease'}} 
+                _hover={{ bg: 'green.700' ,transform: 'scale(1.05)'}} 
                 onClick={() => {
-                  window.location.href = './contato';
+                  window.location.href = 'https://www.manduri.sp.gov.br/fale-conosco/';
                 }}
-
+                
               > Contato
               </Button>
-              <Button
-                variant="ghost" leftIcon={<BsSearch/>}size="sm" color='white'  
-                _hover={{ bg: 'green.700',transform: 'scale(1.05)',
-                transition: 'transform 0.3s ease'}} 
-                onClick={() => {
-                  window.location.href = './consulta';
-                }}
 
-              > Consultar Chamados
-              </Button>
-              
+            
 
               <Button
                 variant="solid"
                 colorScheme="brand"
                 leftIcon={<GrAddCircle />}
-                size="sm" color='gray.800' bg= 'green.200' _hover={{ bg: 'green.600',transform: 'scale(1.05)',
-                transition: 'transform 0.3s ease' }} 
+                size="sm" color='gray.800' bg= 'green.200' _hover={{ bg: 'green.600',transform: 'scale(1.05)' }} 
                 onClick={() => {
                   window.location.href = './Chamado';
                 }}
+
+              
               >Novo chamado
               </Button>
 
@@ -180,10 +182,10 @@ const Choc = () => {
             }
 
             >
-              
               <AiFillBell style={{ fontSize: "21px" }} />
               <VisuallyHidden>Notifications</VisuallyHidden>
             </chakra.a>
+            
 
             <Avatar
               size="sm"
@@ -191,6 +193,16 @@ const Choc = () => {
               src={MinhaImagem}
               style={{ height: '40px', width: '40px' }} 
             />
+
+              <Button
+                variant="solid"
+                colorScheme="brand"
+                size="sm" color='gray.800' bg= 'red.200' _hover={{ bg: 'red.600',transform: 'scale(1.05)' }} 
+                onClick={handleLogout}>Sair
+              </Button>
+
+            
+            
           </HStack>
         </Flex>
       </chakra.header>

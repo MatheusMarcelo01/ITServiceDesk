@@ -8,6 +8,8 @@ import Login from './Components/Login/Login';
 import Chamado from './Components/Chamado/NovoChamado'
 import FinalMain from './Components/Finalizados/FinalMain'
 import Contato from './Components/Contato/Contato';
+import Consulta from './Components/Consulta/ConsultaMain';
+
 
 
 const isAuthenticated = () => {
@@ -40,6 +42,8 @@ function App() {
                 <Route path="/" element={<Homepage/>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/contato" element={<Contato />} />
+                <Route path="/consulta" element={<Consulta />} />
+
 
                 <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />}/>
                 <Route path="*" element={<Navigate to="/login" />} />

@@ -22,6 +22,7 @@
     "mongodb": "^6.6.1",
     "mongoos": "^0.0.1-security",
     "mongoose": "^8.3.4",
+    "node-cache": "^5.1.2",
     "nodemailer": "^6.9.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
