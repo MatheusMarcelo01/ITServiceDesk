@@ -1,0 +1,2 @@
+executar servidor de email:
+node server.js

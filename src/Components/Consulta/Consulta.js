@@ -1,47 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { ButtonGroup, Flex, IconButton, Table, Tbody, Box, Text, Td, Th, Thead, Tr, useColorModeValue, Input } from "@chakra-ui/react";
+import {
+  ButtonGroup,
+  Flex,
+  IconButton,
+  Table,
+  Tbody,
+  Text,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useColorModeValue,
+  Input,
+} from "@chakra-ui/react";
 import { FaInfoCircle } from "react-icons/fa";
-import { BsCheck, BsFillTrashFill, BsCheckCircle, BsTools } from "react-icons/bs";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-import axios from 'axios';
-import Styles from './Consulta.module.css'; // Importe o arquivo CSS aqui
+import { BsCheck, BsFillTrashFill } from "react-icons/bs";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import axios from "axios";
+import Styles from "./Consulta.module.css"; // Importe o arquivo CSS aqui
 
 const List = () => {
   const [data, setData] = useState([]);
-
-  const [completedId, setCompletedId] = useState(null);
-  const [searchId, setSearchId] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento inicial
+  const [completedId, setCompletedId] = useState(null); // Estado para controlar o ID do chamado completado
+  const [searchId, setSearchId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showTable, setShowTable] = useState(false); // Estado para controlar a visibilidade da tabela
   const color1 = useColorModeValue("gray.400", "gray.400");
   const color2 = useColorModeValue("gray.400", "gray.400");
 
   useEffect(() => {
-    setIsLoading(true); // Marca que estamos carregando os dados
+    setIsLoading(true);
 
-    axios.get('http://192.168.0.98:3001/chamados')
-      .then(response => {
+    axios
+      .get("http://192.168.0.98:3001/chamados")
+      .then((response) => {
         setData(response.data);
-        const matheusPending = response.data.filter(item => item.tecnico === "Matheus Marcelo" && !item.completed).length;
-        const joaoPending = response.data.filter(item => item.tecnico === "João Luiz" && !item.completed).length;
-        setPendingByMatheus(matheusPending);
-        setPendingByJoao(joaoPending);
-        setIsLoading(false); // Marca que os dados foram carregados
+        setIsLoading(false);
       })
-      .catch(error => {
-        console.error('Erro ao obter dados do servidor:', error);
-        setIsLoading(false); // Marca que ocorreu um erro no carregamento
+      .catch((error) => {
+        console.error("Erro ao obter dados do servidor:", error);
+        setIsLoading(false);
       });
 
-    axios.get('http://192.168.0.98:3001/finalizados')
-      .then(response => {
-        const matheusCompleted = response.data.filter(item => item.tecnico === "Matheus Marcelo").length;
-        const joaoCompleted = response.data.filter(item => item.tecnico === "João Luiz").length;
-        setCompletedByMatheus(matheusCompleted);
-        setCompletedByJoao(joaoCompleted);
+    axios
+      .get("http://192.168.0.98:3001/finalizados")
+      .then((response) => {
+        // lógica de tratamento dos dados de finalizados
       })
-      .catch(error => {
-        console.error('Erro ao obter dados de atendimentos finalizados:', error);
+      .catch((error) => {
+        console.error("Erro ao obter dados de atendimentos finalizados:", error);
       });
   }, []);
 
@@ -59,6 +67,7 @@ const List = () => {
           .then(() => {
             console.log('Chamado removido da lista de chamados');
             setData(data.filter(item => item.id !== id));
+            setCompletedId(id); // Atualiza o estado completedId
           })
           .catch(error => {
             console.error('Erro ao remover chamado da lista de chamados:', error);
@@ -85,12 +94,17 @@ const List = () => {
   };
 
   const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável"];
-  const reversedData = [...data].reverse(); // Criar uma cópia reversa dos dados
+  const reversedData = [...data].reverse();
 
-  // Função para filtrar os dados com base no ID digitado
-  const filteredData = reversedData.filter(item => {
-    return searchId === '' || item.id.toString().toLowerCase().includes(searchId.toLowerCase());
+  const filteredData = reversedData.filter((item) => {
+    return searchId === "" || item.id.toString().toLowerCase().includes(searchId.toLowerCase());
   });
+
+  const handleChangeSearch = (e) => {
+    const { value } = e.target;
+    setSearchId(value);
+    setShowTable(value !== "");
+  };
 
   return (
     <Flex
@@ -102,167 +116,161 @@ const List = () => {
       justifyContent="center"
       flexDirection="column"
     >
+      Digite o ID do chamado:
       <Input
         type="text"
         placeholder="Digite o ID do chamado"
         value={searchId}
-        onChange={(e) => setSearchId(e.target.value)}
+        onChange={handleChangeSearch}
         mb={4}
         w={{ base: "full", md: "auto" }}
       />
 
-      {isLoading ? ( // Mostra um indicador de carregamento se os dados ainda estão sendo carregados
+      {isLoading ? (
         <Text mt={4}>Carregando...</Text>
-      ) : filteredData.length === 0 ? ( // Mostra uma mensagem se não há dados correspondentes ao filtro
+      ) : filteredData.length === 0 && searchId !== "" ? (
         <Text mt={4}>Nenhum chamado encontrado com o ID {searchId}.</Text>
       ) : (
-        <Table
-          w="full"
-          bg="white"
-          _dark={{ bg: "gray.800" }}
-          display={{
-            base: "block",
-            md: "table",
-          }}
-          sx={{
-            "@media print": {
-              display: "table",
-            },
-          }}
-        >
-          {/* Cabeçalho da tabela */}
-          <Thead
-            display={{
-              base: "none",
-              md: "table-header-group",
-            }}
-            sx={{
-              "@media print": {
-                display: "table-header-group",
-              },
-            }}
-          >
-            <Tr>
-              {header.map((x) => (
-                <Th key={x}>{x}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          {/* Corpo da tabela */}
-          <Tbody
+        showTable && (
+          <Table
+            w="full"
+            bg="white"
+            _dark={{ bg: "gray.800" }}
             display={{
               base: "block",
-              lg: "table-row-group",
+              md: "table",
             }}
             sx={{
               "@media print": {
-                display: "table-row-group",
+                display: "table",
               },
             }}
           >
-            {filteredData.map((token, tid) => {
-              const { data, ...otherData } = token;
+            {/* Cabeçalho da tabela */}
+            <Thead
+              display={{
+                base: "none",
+                md: "table-header-group",
+              }}
+              sx={{
+                "@media print": {
+                  display: "table-header-group",
+                },
+              }}
+            >
+              <Tr>
+                {header.map((x) => (
+                  <Th key={x}>{x}</Th>
+                ))}
+              </Tr>
+            </Thead>
+            {/* Corpo da tabela */}
+            <Tbody
+              display={{
+                base: "block",
+                lg: "table-row-group",
+              }}
+              sx={{
+                "@media print": {
+                  display: "table-row-group",
+                },
+              }}
+            >
+              {filteredData.map((token, tid) => {
+                const { data, ...otherData } = token;
 
-              return (
-                <Tr
-                  key={tid}
-                  display={{
-                    base: "grid",
-                    md: "table-row",
-                  }}
-                  sx={{
-                    "@media print": {
-                      display: "table-row",
-                    },
-                    gridTemplateColumns: "minmax(0px, 35%) minmax(0px, 65%)",
-                    gridGap: "10px",
-                  }}
-                  className={token.id === completedId ? Styles.completed : ''}
-                >
-                  {/* Renderizando dados da linha */}
-                  {Object.keys(otherData).map((x) => {
-                    return (
-                      <React.Fragment key={`${tid}${x}`}>
-                        <Td
-                          display={{
-                            base: "table-cell",
-                            md: "none",
-                          }}
-                          sx={{
-                            "@media print": {
-                              display: "none",
-                            },
-                            textTransform: "uppercase",
-                            color: color1,
-                            fontSize: "xs",
-                            fontWeight: "bold",
-                            letterSpacing: "wider",
-                            fontFamily: "heading",
-                          }}
-                        >
-                          {x}
-                        </Td>
-                        <Td
-                          color={"gray.500"}
-                          fontSize="md"
-                          fontWeight="hairline"
-                        >
-                          {otherData[x]}
-                        </Td>
-                      </React.Fragment>
-                    );
-                  })}
-                  {/* Ações */}
-                  <Td
+                return (
+                  <Tr
+                    key={tid}
                     display={{
-                      base: "table-cell",
-                      md: "none",
+                      base: "grid",
+                      md: "table-row",
                     }}
                     sx={{
                       "@media print": {
-                        display: "none",
+                        display: "table-row",
                       },
-                      textTransform: "uppercase",
-                      color: color2,
-                      fontSize: "xs",
-                      fontWeight: "bold",
-                      letterSpacing: "wider",
-                      fontFamily: "heading",
+                      gridTemplateColumns: "minmax(0px, 35%) minmax(0px, 65%)",
+                      gridGap: "10px",
                     }}
+                    className={token.id === completedId ? Styles.completed : ""}
                   >
-                    Actions
-                  </Td>
-                  <Td>
-                    <ButtonGroup variant="solid" size="sm" spacing={3}>
-                      <IconButton
-                        colorScheme="green"
-                        variant="outline"
-                        icon={<BsCheck />}
-                        aria-label="Finalizar"
-                        onClick={() => handleComplete(token.id)}
-                      />
-                      <Popup position="left center" variant="solid" size="sm" spacing={3}  trigger={ 
-                        <IconButton
-                          colorScheme="blue"
-                          icon={<FaInfoCircle />}
-                          aria-label="Detalhes"
-                        />} >
-                        <div>Data e hora do chamado: {token.data}</div>
-                      </Popup>
-                      <IconButton
-                        colorScheme="red"
-                        variant="outline"
-                        icon={<BsFillTrashFill />}
-                        aria-label="Excluir"
-                        onClick={() => handleDelete(token.id)}
-                      />
-                    </ButtonGroup>
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
+                    {/* Renderizando dados da linha */}
+                    {Object.keys(otherData).map((x) => {
+                      return (
+                        <React.Fragment key={`${tid}${x}`}>
+                          <Td
+                            display={{
+                              base: "table-cell",
+                              md: "none",
+                            }}
+                            sx={{
+                              "@media print": {
+                                display: "none",
+                              },
+                              textTransform: "uppercase",
+                              color: color1,
+                              fontSize: "xs",
+                              fontWeight: "bold",
+                              letterSpacing: "wider",
+                              fontFamily: "heading",
+                            }}
+                          >
+                            {x}
+                          </Td>
+                          <Td color={"gray.500"} fontSize="md" fontWeight="hairline">
+                            {otherData[x]}
+                          </Td>
+                        </React.Fragment>
+                      );
+                    })}
+                    {/* Ações */}
+                    <Td
+                      display={{
+                        base: "table-cell",
+                        md: "none",
+                      }}
+                      sx={{
+                        "@media print": {
+                          display: "none",
+                        },
+                        textTransform: "uppercase",
+                        color: color2,
+                        fontSize: "xs",
+                        fontWeight: "bold",
+                        letterSpacing: "wider",
+                        fontFamily: "heading",
+                      }}
+                    >
+                      Actions
+                    </Td>
+                    <Td>
+                      <ButtonGroup variant="solid" size="sm" spacing={3}>
+                      
+                        <Popup
+                          position="left center"
+                          variant="solid"
+                          size="sm"
+                          spacing={3}
+                          trigger={
+                            <IconButton
+                              colorScheme="blue"
+                              icon={<FaInfoCircle />}
+                              aria-label="Detalhes"
+                            />
+                          }
+                        >
+                          <div>Data e hora do chamado: {token.data}</div>
+                        </Popup>
+                       
+                      </ButtonGroup>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
+        )
       )}
     </Flex>
   );
