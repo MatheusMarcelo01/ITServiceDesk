@@ -20,7 +20,7 @@ const List = () => {
   const color2 = useColorModeValue("gray.400", "gray.400");
 
   useEffect(() => {
-    axios.get('http://192.168.0.98:3001/chamados')
+    axios.get('http://localhost:3001/chamados')
       .then(response => {
         setData(response.data);
         const matheusPending = response.data.filter(item => item.tecnico === "Matheus Marcelo" && !item.completed).length;
@@ -36,7 +36,7 @@ const List = () => {
         console.error('Erro ao obter dados do servidor:', error);
       });
 
-    axios.get('http://192.168.0.98:3001/finalizados')
+    axios.get('http://localhost:3001/finalizados')
       .then(response => {
         const matheusCompleted = response.data.filter(item => item.tecnico === "Matheus Marcelo").length;
         const joaoCompleted = response.data.filter(item => item.tecnico === "João Luiz").length;
@@ -59,10 +59,10 @@ const List = () => {
       return;
     }
   
-    axios.post('http://192.168.0.98:3001/finalizados', item)
+    axios.post('http://localhost:3001/finalizados', item)
       .then(response => {
         console.log('Chamado movido para finalizados:', response.data);
-        axios.delete(`http://192.168.0.98:3001/chamados/${id}`)
+        axios.delete(`http://localhost:3001/chamados/${id}`)
           .then(() => {
             console.log('Chamado removido da lista de chamados');
             setData(data.filter(item => item.id !== id));
@@ -80,7 +80,7 @@ const List = () => {
     const confirmDelete = window.confirm("Deseja realmente excluir este chamado?");
   
     if (confirmDelete) {
-      axios.delete(`http://192.168.0.98:3001/chamados/${id}`)
+      axios.delete(`http://localhost:3001/chamados/${id}`)
         .then(response => {
           console.log('Chamado deletado:', response.data);
           setData(data.filter(item => item.id !== id));

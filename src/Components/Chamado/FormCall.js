@@ -43,20 +43,24 @@ export default function App() {
       }
       values.tecnico = tecnico;
   
-      // Enviar dados do formulário para o backend e também enviar email
       axios.post("http://192.168.0.98:3001/chamados", values)
         .then(async (response) => {
+          const novoChamadoId = response.data.id; // Supondo que o backend retorna o ID do novo chamado
           setNumChamados(numChamados + 1);
           
-          const content = `Seu chamado foi criado com sucesso!<br/>
-          O profissional responsável pelo seu atendimento será: <br /> 
-          <strong>${tecnico}</strong>!<br /><br />
-          <strong style="text-align: center;"><span style="font-size: 22px; color: red;">ATENÇÃO</span><br/>
-          Você é o <span style="font-size: 20px; color: red;">${numChamados + 1}º</span> na fila de atendimento.</strong><br/><br/>
-          Aguarde retorno pelo seu e-mail institucional!`;
+          // Montar o conteúdo do email e do modal com o número do protocolo
+          const content = `
+            Seu chamado foi criado com sucesso!<br/>
+            O profissional responsável pelo seu atendimento será: <br /> 
+            <strong>${tecnico}</strong>!<br /><br />
+            <strong style="text-align: center;"><span style="font-size: 22px; color: red;">ATENÇÃO</span><br/>
+            Você é o <span style="font-size: 20px; color: red;">${numChamados + 1}º</span> na fila de atendimento.</strong><br/><br/>
+            Seu número de protocolo é: <span style="font-size: 20px; color: red;">${novoChamadoId}</span></strong><br/><br/>
+            Aguarde retorno pelo seu e-mail institucional!<br/>
+          `;
   
           handleOpenModal(content);
-
+  
           // Enviar email
           await axios.post("http://192.168.0.98:3002/chamados", { ...values, tecnico }); 
         })
@@ -69,7 +73,6 @@ export default function App() {
       setSubmitting(false);
     }
   };
-
 
   return (
     <Flex bg="gray.900" align="center" justify="center" h="100vh">

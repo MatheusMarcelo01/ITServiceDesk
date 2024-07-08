@@ -33,7 +33,7 @@ const List = () => {
     setIsLoading(true);
 
     axios
-      .get("http://192.168.0.98:3001/chamados")
+      .get("http://localhost:3001/chamados")
       .then((response) => {
         setData(response.data);
         setIsLoading(false);
@@ -44,7 +44,7 @@ const List = () => {
       });
 
     axios
-      .get("http://192.168.0.98:3001/finalizados")
+      .get("http://localhost:3001/finalizados")
       .then((response) => {
         // lógica de tratamento dos dados de finalizados
       })
@@ -60,10 +60,10 @@ const List = () => {
       return;
     }
   
-    axios.post('http://192.168.0.98:3001/finalizados', item)
+    axios.post('http://localhost:3001/finalizados', item)
       .then(response => {
         console.log('Chamado movido para finalizados:', response.data);
-        axios.delete(`http://192.168.0.98:3001/chamados/${id}`)
+        axios.delete(`http://localhost:3001/chamados/${id}`)
           .then(() => {
             console.log('Chamado removido da lista de chamados');
             setData(data.filter(item => item.id !== id));
@@ -82,7 +82,7 @@ const List = () => {
     const confirmDelete = window.confirm("Deseja realmente excluir este chamado?");
   
     if (confirmDelete) {
-      axios.delete(`http://192.168.0.98:3001/chamados/${id}`)
+      axios.delete(`http://localhost:3001/chamados/${id}`)
         .then(response => {
           console.log('Chamado deletado:', response.data);
           setData(data.filter(item => item.id !== id));

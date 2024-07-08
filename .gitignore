@@ -3,6 +3,7 @@
 users.js
 auth.js
 db.json
+cmd.txt
 
 # dependencies
 /node_modules
