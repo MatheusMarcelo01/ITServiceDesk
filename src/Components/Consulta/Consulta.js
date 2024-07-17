@@ -102,9 +102,18 @@ const List = () => {
 
   const handleChangeSearch = (e) => {
     const { value } = e.target;
-    setSearchId(value);
-    setShowTable(value !== "");
+    
+    // Verifica se o valor digitado tem o comprimento esperado (por exemplo, 4 caracteres)
+    if (value.length === 4) {
+      setSearchId(value);
+      setShowTable(true);  // Mostra a tabela porque o ID foi digitado completamente
+    } else {
+      setSearchId(value);  // Atualiza o searchId com o valor atual, mesmo se não for 4 caracteres
+      setShowTable(false);  // Esconde a tabela se o ID não estiver completo
+    }
   };
+  
+  
 
   return (
     <Flex
