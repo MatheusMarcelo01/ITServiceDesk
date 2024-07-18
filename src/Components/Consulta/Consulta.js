@@ -14,7 +14,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { FaInfoCircle } from "react-icons/fa";
-import { BsCheck, BsFillTrashFill } from "react-icons/bs";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import axios from "axios";
@@ -33,9 +32,12 @@ const List = () => {
     setIsLoading(true);
 
     axios
-      .get("http://localhost:3001/chamados")
+      .get("http://192.168.0.162:3001/chamados")
       .then((response) => {
-        setData(response.data);
+        setData(response.data.map((item, index) => ({
+          ...item,
+          position: index === 0 ? "Em atendimento" : `${index + 1}º`, // Verifica se é o primeiro item na fila
+        })));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -44,7 +46,7 @@ const List = () => {
       });
 
     axios
-      .get("http://localhost:3001/finalizados")
+      .get("http://192.168.0.162:3001/finalizados")
       .then((response) => {
         // lógica de tratamento dos dados de finalizados
       })
@@ -60,10 +62,10 @@ const List = () => {
       return;
     }
   
-    axios.post('http://localhost:3001/finalizados', item)
+    axios.post('http://192.168.0.162:3001/finalizados', item)
       .then(response => {
         console.log('Chamado movido para finalizados:', response.data);
-        axios.delete(`http://localhost:3001/chamados/${id}`)
+        axios.delete(`http://192.168.0.162:3001/chamados/${id}`)
           .then(() => {
             console.log('Chamado removido da lista de chamados');
             setData(data.filter(item => item.id !== id));
@@ -82,7 +84,7 @@ const List = () => {
     const confirmDelete = window.confirm("Deseja realmente excluir este chamado?");
   
     if (confirmDelete) {
-      axios.delete(`http://localhost:3001/chamados/${id}`)
+      axios.delete(`http://192.168.0.162:3001/chamados/${id}`)
         .then(response => {
           console.log('Chamado deletado:', response.data);
           setData(data.filter(item => item.id !== id));
@@ -93,17 +95,24 @@ const List = () => {
     }
   };
 
-  const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável"];
+  const header = ["ID", "Nome", "E-mail", "Tipo de problema", "Departamento", "Sobre o problema", "TI Responsável", "Posição na fila"];
   const reversedData = [...data].reverse();
 
   const filteredData = reversedData.filter((item) => {
     return searchId === "" || item.id.toString().toLowerCase().includes(searchId.toLowerCase());
   });
 
-  const handleChangeSearch = (e) => {
+ const handleChangeSearch = (e) => {
     const { value } = e.target;
-    setSearchId(value);
-    setShowTable(value !== "");
+    
+    // Verifica se o valor digitado tem o comprimento esperado (por exemplo, 4 caracteres)
+    if (value.length === 4) {
+      setSearchId(value);
+      setShowTable(true);  // Mostra a tabela porque o ID foi digitado completamente
+    } else {
+      setSearchId(value);  // Atualiza o searchId com o valor atual, mesmo se não for 4 caracteres
+      setShowTable(false);  // Esconde a tabela se o ID não estiver completo
+    }
   };
 
   return (

@@ -15,16 +15,18 @@ app.use(cors());
 app.post('/chamados', (req, res) => {
   const {tecnico, nome, email, tipos, departamento, sobre } = req.body;
 
+  // Configurar o transporte SMTP
   const transporter = nodemailer.createTransport({
-    host: config.provedor, 
+    host: config.provedor, // Aqui você acessa config.provedor
     port: 587,
     secure: false,
     auth: {
-      user: config.email,
-      pass: config.senha 
+      user: config.email, // Aqui você acessa config.email
+      pass: config.senha // Aqui você acessa config.senha
     }
   });
 
+  // Configurar o email
   const mailOptions = {
     from: config.email,
     to: 'cpd@manduri.sp.gov.br',
@@ -39,6 +41,7 @@ app.post('/chamados', (req, res) => {
     `
   };
 
+  // Enviar o email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error('Erro ao enviar o email:', error);
@@ -50,6 +53,7 @@ app.post('/chamados', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+// Iniciar o servidor
+app.listen(port, '192.168.0.98', () => {
+  console.log(`Servidor rodando em http://192.168.0.98:${port}`);
 });

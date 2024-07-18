@@ -22,7 +22,6 @@
     "mongodb": "^6.6.1",
     "mongoos": "^0.0.1-security",
     "mongoose": "^8.3.4",
-    "node-cache": "^5.1.2",
     "nodemailer": "^6.9.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,7 +33,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "json-server": "json-server --watch db.json --port 3001",
+    "json-server": "json-server --host 192.168.0.162 --watch db.json --port 3001",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

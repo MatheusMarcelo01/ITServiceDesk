@@ -1,2 +1,5 @@
+executar json: 
+json-server --watch db.json --port 3001
+
 executar servidor de email:
 node server.js

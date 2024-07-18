@@ -31,7 +31,7 @@ const FaleConosco = () => {
 
       <Text fontSize="md" mt={4}>
         Repositório do sistema open-source para colaborações: {" "}
-        <Link href="https://github.com/MatheusMarcelo01/ITServiceDesk" target="_blank" rel="noopener noreferrer">Repositório no GitHub</Link>
+
       </Text>
     </Box>
   );
