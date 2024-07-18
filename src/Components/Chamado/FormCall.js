@@ -12,7 +12,7 @@ export default function App() {
 
 
   useEffect(() => {
-    axios.get("http://192.168.0.98:3001/chamados")
+    axios.get("http://192.168.0.162:3001/chamados")
       .then(response => {
         setNumChamados(response.data.length);
       })
@@ -28,7 +28,7 @@ export default function App() {
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    window.location.href = '/'; 
+    window.location.href = '/'; // Redirecionar para a home
   };
 
 
@@ -43,7 +43,7 @@ export default function App() {
       }
       values.tecnico = tecnico;
   
-      axios.post("http://192.168.0.98:3001/chamados", values)
+      axios.post("http://192.168.0.162:3001/chamados", values)
         .then(async (response) => {
           const novoChamadoId = response.data.id; // Supondo que o backend retorna o ID do novo chamado
           setNumChamados(numChamados + 1);
@@ -62,7 +62,7 @@ export default function App() {
           handleOpenModal(content);
   
           // Enviar email
-          await axios.post("http://192.168.0.98:3002/chamados", { ...values, tecnico }); 
+          await axios.post("http://192.168.0.162:3002/chamados", { ...values, tecnico }); 
         })
         .catch(error => {
           console.error("Erro ao criar chamado:", error);
@@ -246,3 +246,4 @@ export default function App() {
     </Flex>
   );
 }
+

@@ -6,7 +6,7 @@ const Choc = () => {
 
 
   useEffect(() => {
-    fetch("http://192.168.0.98:3001/finalizados")
+    fetch("http://192.168.0.162:3001/finalizados")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
