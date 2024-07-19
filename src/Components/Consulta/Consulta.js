@@ -36,7 +36,7 @@ const List = () => {
       .then((response) => {
         setData(response.data.map((item, index) => ({
           ...item,
-          position: index === 0 ? "Em atendimento" : `${index + 1}º`, // Verifica se é o primeiro item na fila
+          position: index === 0 ? "Em atendimento" : `Este é o ${index + 1}º chamado, na lista de atendimento. Há outros ${index} chamados a serem atendidos, Aguarde.`, // Verifica se é o primeiro item na fila
         })));
         setIsLoading(false);
       })
