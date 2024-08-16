@@ -111,6 +111,19 @@ const List = () => {
 
 
 <Flex mt="-10" ml="1000" flexDirection={{ base: "column", md: "row" }} justifyContent="center" alignItems="center">
+<Box    mb={5}    border="2px solid #E2E8F0"    borderRadius="md" p={4}    textAlign="center"    position="relative"    left={{ md: "-800px" }} >      
+    <Text fontWeight="bold" mb={2}>Daily tasks:</Text>
+    <Flex align="center">
+      <BsTools />
+      <Text ml={1} mr={1}>Verif. backup SMB</Text>
+    </Flex>
+    <Flex align="center" mt={2}>
+      <BsTools />
+      <Text ml={1} mr={1}>Att modules 15/15</Text>
+    </Flex>
+
+  </Box>
+  
   <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center">
     <Text fontWeight="bold" mb={2}>Chamados Matheus:</Text>
     <Flex align="center">
