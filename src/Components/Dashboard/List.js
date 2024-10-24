@@ -110,8 +110,8 @@ const List = () => {
     >
 
 
-<Flex mt="-10" ml="1000" flexDirection={{ base: "column", md: "row" }} justifyContent="center" alignItems="center">
-<Box    mb={5}    border="2px solid #E2E8F0"    borderRadius="md" p={4}    textAlign="center"    position="relative"    left={{ md: "-800px" }} >      
+<Flex mt="-10" flexDirection={{ base: "column", md: "row" }} justifyContent="flex-start" alignItems="flex-start">
+  <Box mb={5} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center" flex="1" maxW={{ base: "100%", md: "350px" }} mr={{ base: 0, md: "20px" }}>
     <Text fontWeight="bold" mb={2}>Daily tasks:</Text>
     <Flex align="center">
       <BsTools />
@@ -121,11 +121,10 @@ const List = () => {
       <BsTools />
       <Text ml={1} mr={1}>Att modules 15/15</Text>
     </Flex>
-
   </Box>
-  
-  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center">
-    <Text fontWeight="bold" mb={2}>Chamados Matheus:</Text>
+
+  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center" flex="1" maxW={{ base: "100%", md: "300px" }} mr={{ base: 0, md: "20px" }}>
+    <Text fontWeight="bold" mb={2}>Estatísticas recentes Matheus Marcelo:</Text>
     <Flex align="center">
       <BsTools />
       <Text ml={1} mr={1}>Chamados abertos:</Text>
@@ -137,8 +136,9 @@ const List = () => {
       <Text color="blue">{completedByMatheus}</Text>
     </Flex>
   </Box>
-  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center">
-    <Text fontWeight="bold" mb={2}>Chamados João:</Text>
+
+  <Box mb={4} border="2px solid #E2E8F0" borderRadius="md" p={4} textAlign="center" flex="1" maxW={{ base: "100%", md: "300px" }}>
+    <Text fontWeight="bold" mb={2}>Estatísticas recentes <br/> João Luiz:</Text>
     <Flex align="center">
       <BsTools />
       <Text ml={1} mr={1}>Chamados abertos:</Text>
@@ -151,6 +151,8 @@ const List = () => {
     </Flex>
   </Box>
 </Flex>
+
+
 
 
       
